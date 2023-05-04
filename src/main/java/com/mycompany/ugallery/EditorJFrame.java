@@ -213,7 +213,7 @@ public class EditorJFrame extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (rutaLbl.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una imagen", "EDITOR", JOptionPane.WARNING_MESSAGE);
-        }else if(bynCheckbox.isSelected()==false && copiaCheckbox.isSelected()==false && copiaCheckbox.isSelected()== false && jpgBmpCheckbox.isSelected()==false && coloresCheckbox.isSelected()==false && modificarCheckbox.isSelected()==false){
+        }else if(bynCheckbox.isSelected()==false && copiaCheckbox.isSelected()==false && jpgBmpCheckbox.isSelected()==false && coloresCheckbox.isSelected()==false && modificarCheckbox.isSelected()==false){
             JOptionPane.showMessageDialog(null, "Debe seleccionar una de las opciones", "EDITOR", JOptionPane.WARNING_MESSAGE);
         }else{
             if (bynCheckbox.isSelected()==true) {

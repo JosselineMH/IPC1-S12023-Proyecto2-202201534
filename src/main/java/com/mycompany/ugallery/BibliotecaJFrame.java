@@ -81,7 +81,7 @@ public class BibliotecaJFrame extends javax.swing.JFrame {
         rutaImagenTxt = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        contador1 = new javax.swing.JLabel();
+        contadorLbl = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         contadortotal = new javax.swing.JLabel();
         nombreImagenTxt = new javax.swing.JTextField();
@@ -217,9 +217,9 @@ public class BibliotecaJFrame extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("FOTOGRAFÍA");
 
-        contador1.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 14)); // NOI18N
-        contador1.setForeground(new java.awt.Color(255, 255, 255));
-        contador1.setText("0");
+        contadorLbl.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 14)); // NOI18N
+        contadorLbl.setForeground(new java.awt.Color(255, 255, 255));
+        contadorLbl.setText("0");
 
         jLabel5.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -279,7 +279,7 @@ public class BibliotecaJFrame extends javax.swing.JFrame {
                         .addGap(170, 170, 170)
                         .addComponent(jLabel3)
                         .addGap(29, 29, 29)
-                        .addComponent(contador1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(contadorLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -305,7 +305,7 @@ public class BibliotecaJFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(contador1)
+                            .addComponent(contadorLbl)
                             .addComponent(jLabel5)
                             .addComponent(contadortotal))
                         .addGap(9, 9, 9)
@@ -385,6 +385,7 @@ public class BibliotecaJFrame extends javax.swing.JFrame {
             Imagen nuevaImagen = new Imagen();
             nuevaImagen.setImageIcon(imagen);
             nuevaImagen.setNombre(nombre);
+            nuevaImagen.setRutaImagen(rutaImagenTxt.getText());
 
             Categoria categoria = (Categoria)usuarioAct.getListaCategorias().get(categoriaList.getSelectedIndex());
             categoria.agregarImagen(nuevaImagen);
@@ -409,7 +410,7 @@ public class BibliotecaJFrame extends javax.swing.JFrame {
         if(nombreImagenTxt.getText().isEmpty()){
            JOptionPane.showMessageDialog(null, "Selecciona una categoría para cambiar de imagen.", "Ugallery", JOptionPane.ERROR_MESSAGE);
         }else{
-           categoria.SiguienteImagen(nombreImagenTxt, imagenLbl);
+           categoria.SiguienteImagen(nombreImagenTxt, imagenLbl,contadorLbl);
 
         }
     
@@ -473,7 +474,7 @@ public class BibliotecaJFrame extends javax.swing.JFrame {
         if(nombreImagenTxt.getText().isEmpty()){
            JOptionPane.showMessageDialog(null, "Selecciona una categoría para cambiar de imagen.", "Ugallery", JOptionPane.ERROR_MESSAGE);
         }else{
-           categoria.AnteriorImagen(nombreImagenTxt, imagenLbl);
+           categoria.AnteriorImagen(nombreImagenTxt, imagenLbl, contadorLbl);
 
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -492,11 +493,14 @@ public class BibliotecaJFrame extends javax.swing.JFrame {
                 Imagen = Imagen.getScaledInstance(imagenLbl.getWidth(), imagenLbl.getHeight(), Image.SCALE_DEFAULT);
                 imagenLbl.setIcon(new ImageIcon(Imagen));
                 nombreImagenTxt.setText(NombreImagen);
-                contador1.setText("1");
-                contador1.setText(String.valueOf(categoria.getListaimagenes().getSize()));
+                contadorLbl.setText("1");
+                contadortotal.setText(String.valueOf(listaImagenes.getSize()));
+                
+                
             }else{
-                contador1.setText("0");
-                contador1.setText("0");
+                
+                contadorLbl.setText("0");
+                contadortotal.setText("0");
                 nombreImagenTxt.setText(null);
                 imagenLbl.setIcon(null); 
             }
@@ -504,27 +508,7 @@ public class BibliotecaJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_categoriaListMouseClicked
 
     private void categoriaListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_categoriaListValueChanged
-        /*Usuario usuarioActual = (Usuario) AppState.listausuarios.find(UsuarioTxt.getText()); 
-        Categoria categoriaSeleccionada = (Categoria)usuarioActual.listacategoria.get(categoriaList.getSelectedIndex());
-        if (categoriaSeleccionada != null) {
-            // Obtener la lista de imágenes de la categoría
-            ListaDobleImagen listaImagenes = categoriaSeleccionada.getListaimagenes();
 
-            if (listaImagenes != null && !listaImagenes.isEmpty()) {
-                // Obtener la primera imagen de la lista
-                Imagen primeraImagen = (Imagen) listaImagenes.get(0);
-
-                // Mostrar la imagen en el JLabel
-                ImageIcon imagenIcono = primeraImagen.getImageIcon();
-                Image imagen = imagenIcono.getImage();
-                Image imagenRedimensionada = imagen.getScaledInstance(imagenLbl.getWidth(), imagenLbl.getHeight(), Image.SCALE_SMOOTH);
-                ImageIcon imagenRedimensionadaIcon = new ImageIcon(imagenRedimensionada);
-                imagenLbl.setIcon(imagenRedimensionadaIcon);
-            } else {
-                // Limpiar el contenido del JLabel si no hay imágenes disponibles
-                imagenLbl.setIcon(null);
-            }
-        }*/
 
     }//GEN-LAST:event_categoriaListValueChanged
 
@@ -605,7 +589,7 @@ public class BibliotecaJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTextField UsuarioTxt;
     private javax.swing.JList<String> categoriaList;
-    private javax.swing.JLabel contador1;
+    private javax.swing.JLabel contadorLbl;
     private javax.swing.JLabel contadortotal;
     private javax.swing.JLabel imagenLbl;
     private javax.swing.JButton jButton1;

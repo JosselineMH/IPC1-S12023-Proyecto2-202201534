@@ -6,6 +6,7 @@ package estructuras;
 
 import com.mycompany.ugallery.Imagen;
 import java.awt.Image;
+import java.util.*;
 import javax.swing.*;
 
 /**
@@ -16,10 +17,24 @@ public class ListaDobleImagen extends EstructuraDeDatos{
     NodoImagen  primerNodo;
     NodoImagen ultimoNodo;
     public ImageIcon icono;
-
+    public int contadormov=1;
+    public int contador2;
+    DefaultListModel<String> modelo1 = new DefaultListModel();
     
     public boolean isEmpty() {
         return primerNodo == null;
+    }
+    
+    
+    public void listaImagen(ArrayList<String> listaImagenes){
+        if(primerNodo==null){
+            return;
+        }
+        NodoImagen NodoAuxiliar=primerNodo;
+        while(NodoAuxiliar!=null){
+            listaImagenes.add(NodoAuxiliar.getImagen().getRutaImagen());
+            NodoAuxiliar=NodoAuxiliar.getSiguiente();
+        }
     }
     
     @Override
@@ -54,7 +69,7 @@ public class ListaDobleImagen extends EstructuraDeDatos{
         System.out.println("null");
     }
     
-    public void Siguiente(JTextField NombreImagen, JLabel ImagenLBL){
+    public void Siguiente(JTextField NombreImagen, JLabel ImagenLBL, JLabel contadormovimiento){
         String nombreImagen=NombreImagen.getText();
         if(primerNodo==null){
             return;
@@ -71,6 +86,11 @@ public class ListaDobleImagen extends EstructuraDeDatos{
                     Image Imagen = icono.getImage();
                     Imagen = Imagen.getScaledInstance(ImagenLBL.getWidth(), ImagenLBL.getHeight(), Image.SCALE_DEFAULT);
                     ImagenLBL.setIcon(new ImageIcon(Imagen));
+                    contadormov += 1;
+                    contadormovimiento.setText(String.valueOf(contadormov).toString());
+                    if (contadormov == index) {
+                        contadormov =index;
+                    }
                     break;    
                 }
             }else{
@@ -79,7 +99,7 @@ public class ListaDobleImagen extends EstructuraDeDatos{
         }
     }
     
-    public void Anterior(JTextField NombreImagen, JLabel ImagenLBL){
+    public void Anterior(JTextField NombreImagen, JLabel ImagenLBL, JLabel contadormovimiento){
         String nombreImagen=NombreImagen.getText();
         if(ultimoNodo==null){
             return;
@@ -96,6 +116,16 @@ public class ListaDobleImagen extends EstructuraDeDatos{
                     Image Imagen = icono.getImage();
                     Imagen = Imagen.getScaledInstance(ImagenLBL.getWidth(), ImagenLBL.getHeight(), Image.SCALE_DEFAULT);
                     ImagenLBL.setIcon(new ImageIcon(Imagen));
+                    if (contadormov == 1) {
+                        contadormov = 1;
+                    } else {
+                        contadormov--;
+                        if (contadormov < 1) {
+                            contadormov = 1;
+                        }
+                    }
+                    contadormovimiento.setText(String.valueOf(contadormov).toString());
+                    
                     break;
                 }
             }else{
@@ -103,8 +133,30 @@ public class ListaDobleImagen extends EstructuraDeDatos{
             }
         } 
     }
+    
+    /*public void retornarNombre(DefaultListModel<String> modelo) {
+        NodoImagen nodoActual = primerNodo;
+        while (nodoActual != null) {
+            modelo.addElement(nodoActual.getImagen().getNombre());
+            nodoActual = nodoActual.getSiguiente();
+        }
+    }*/
 
-   
+    public void retornarNombre(JList listaImagenes){
+        if(primerNodo==null){
+            return;
+        }
+        NodoImagen NodoAuxiliar=primerNodo;
+        modelo1.removeAllElements();
+        while(NodoAuxiliar!=null){
+            modelo1.addElement(NodoAuxiliar.getImagen().getNombre());
+            NodoAuxiliar=NodoAuxiliar.getSiguiente();
+        }
+        listaImagenes.setModel(modelo1);
+    }
+    
+    
+    
     @Override
     public Object peek() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -182,4 +234,7 @@ public class ListaDobleImagen extends EstructuraDeDatos{
         index--;
     }
     
+    
+    
+
 }

@@ -14,7 +14,18 @@ import javax.swing.ImageIcon;
  */
 public class Imagen {
      public String nombre;
+     public String rutaImagen;
      public ImageIcon imageIcon;
+
+    public String getRutaImagen() {
+        return rutaImagen;
+    }
+
+    public void setRutaImagen(String rutaImagen) {
+        this.rutaImagen = rutaImagen;
+    }
+     
+     
      
     public ImageIcon getImageIcon() {
         return imageIcon;

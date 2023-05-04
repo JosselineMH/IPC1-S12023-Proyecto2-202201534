@@ -5,6 +5,7 @@
 package estructuras;
 
 import com.mycompany.ugallery.Usuario;
+import javax.swing.*;
 
 /**
  *
@@ -12,6 +13,7 @@ import com.mycompany.ugallery.Usuario;
  */
 public class ListaSimpleUsuario extends EstructuraDeDatos {
     private NodoUsuario cabeza = null;
+    
   
     
     public void listarNombres(){
@@ -24,7 +26,15 @@ public class ListaSimpleUsuario extends EstructuraDeDatos {
         
         System.out.println("null \n");
     }
-
+    
+    public void LlenarUsuarios(JComboBox comboBox){
+        NodoUsuario nodoAuxiliar = cabeza;
+        while (nodoAuxiliar != null) {
+            Usuario usuario = nodoAuxiliar.getUsuario();
+            comboBox.addItem(usuario.getNombreusuario());
+            nodoAuxiliar = nodoAuxiliar.getSiguiente();
+        }
+    }
     
 
         
