@@ -37,7 +37,8 @@ public class BibliotecaJFrame extends javax.swing.JFrame {
         setTitle("BIBLIOTECA");
         
         categoriaList.setModel(modeloCategoria);
-        
+        rutaImagenTxt.setVisible(false);
+        nombreImagenTxt.setVisible(false);
         
         datoUsuario = nombreUsTxt.getText();
         System.out.println(datoUsuario);
